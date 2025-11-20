@@ -2,16 +2,16 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Samuele Mannarella – Tech Resume</title>
+  <title>Samuele M. – Tech Resume</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
     :root {
-      --bg-gradient: radial-gradient(circle at top, #23293f 0%, #050611 45%, #020308 100%);
-      --accent: #4fd1c5;
-      --accent-soft: rgba(79, 209, 197, 0.16);
-      --accent-strong: #22c55e;
+      --bg-gradient: radial-gradient(circle at top, #251933 0%, #050312 45%, #020008 100%);
+      --accent: #a855f7;
+      --accent-soft: rgba(168, 85, 247, 0.16);
+      --accent-strong: #c4b5fd;
       --text-main: #f9fafb;
-      --text-muted: #9ca3af;
+      --text-muted: #a1a1aa;
       --card-bg: rgba(15, 23, 42, 0.9);
       --border-subtle: rgba(148, 163, 184, 0.25);
       --shadow-soft: 0 20px 40px rgba(0, 0, 0, 0.6);
@@ -37,6 +37,76 @@
       scroll-behavior: smooth;
     }
 
+    /* ─────────────────────────────────────
+       SPLASH SCREEN (Phantom-style logo)
+    ───────────────────────────────────── */
+    #splash {
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(circle at top, rgba(88, 28, 135, 0.6) 0%, #020014 55%, #020008 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 999;
+      transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+    }
+
+    #splash.hidden {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    .splash-logo-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .splash-logo {
+      width: 90px;
+      height: 90px;
+      border-radius: 28px;
+      background: radial-gradient(circle at 30% 20%, #e9d5ff 0%, #c4b5fd 20%, #4c1d95 70%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      font-size: 28px;
+      color: #050017;
+      box-shadow:
+        0 0 0 1px rgba(248, 250, 252, 0.15),
+        0 18px 45px rgba(59, 7, 100, 0.9),
+        0 0 40px rgba(168, 85, 247, 0.8);
+      animation: splash-pop 1s ease-out infinite alternate;
+    }
+
+    .splash-text {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.25em;
+      color: var(--text-muted);
+    }
+
+    @keyframes splash-pop {
+      0% {
+        transform: scale(0.96);
+        box-shadow:
+          0 0 0 1px rgba(248, 250, 252, 0.15),
+          0 14px 36px rgba(59, 7, 100, 0.7),
+          0 0 24px rgba(168, 85, 247, 0.6);
+      }
+      100% {
+        transform: scale(1.02);
+        box-shadow:
+          0 0 0 1px rgba(248, 250, 252, 0.25),
+          0 22px 55px rgba(76, 29, 149, 0.95),
+          0 0 46px rgba(216, 180, 254, 0.9);
+      }
+    }
+
     /* Layout */
     .page {
       max-width: 1120px;
@@ -51,8 +121,8 @@
       backdrop-filter: blur(18px);
       background: linear-gradient(
         to bottom,
-        rgba(3, 7, 18, 0.9),
-        rgba(3, 7, 18, 0.2)
+        rgba(3, 0, 25, 0.9),
+        rgba(3, 0, 25, 0.18)
       );
       border-bottom: 1px solid rgba(148, 163, 184, 0.25);
     }
@@ -78,15 +148,15 @@
       width: 36px;
       height: 36px;
       border-radius: 16px;
-      background: radial-gradient(circle at 30% 20%, #6ee7b7 0%, #22c55e 20%, #0f172a 70%);
+      background: radial-gradient(circle at 30% 20%, #f5e1ff 0%, #e9d5ff 20%, #4c1d95 70%);
       display: flex;
       align-items: center;
       justify-content: center;
       font-weight: 800;
       letter-spacing: 0.06em;
       font-size: 18px;
-      color: #020617;
-      box-shadow: 0 8px 18px rgba(16, 185, 129, 0.4);
+      color: #050017;
+      box-shadow: 0 8px 18px rgba(124, 58, 237, 0.7);
     }
 
     .logo-text {
@@ -132,7 +202,7 @@
     }
 
     nav a.active {
-      color: #0f172a;
+      color: #020014;
       background: var(--accent);
       border-color: transparent;
       font-weight: 600;
@@ -146,7 +216,7 @@
 
     section {
       border-radius: var(--radius-lg);
-      background: radial-gradient(circle at top left, #0b1120 0, rgba(15, 23, 42, 0.9) 40%, #020617 100%);
+      background: radial-gradient(circle at top left, #020014 0, rgba(15, 23, 42, 0.9) 40%, #020008 100%);
       border: 1px solid var(--border-subtle);
       box-shadow: var(--shadow-soft);
       padding: 20px 18px 22px;
@@ -158,8 +228,8 @@
       content: "";
       position: absolute;
       inset: 0;
-      background: radial-gradient(circle at top right, rgba(79, 209, 197, 0.18), transparent 55%);
-      opacity: 0.45;
+      background: radial-gradient(circle at top right, rgba(168, 85, 247, 0.18), transparent 55%);
+      opacity: 0.5;
       pointer-events: none;
       mix-blend-mode: screen;
     }
@@ -201,8 +271,8 @@
       width: 6px;
       height: 6px;
       border-radius: 999px;
-      background: var(--accent-strong);
-      box-shadow: 0 0 10px rgba(34, 197, 94, 0.7);
+      background: var(--accent);
+      box-shadow: 0 0 10px rgba(168, 85, 247, 0.9);
     }
 
     .hero-header {
@@ -266,14 +336,14 @@
 
     .btn-primary {
       background: linear-gradient(135deg, var(--accent), var(--accent-strong));
-      color: #020617;
+      color: #020014;
       font-weight: 600;
-      box-shadow: 0 14px 30px rgba(16, 185, 129, 0.45);
+      box-shadow: 0 14px 30px rgba(109, 40, 217, 0.6);
     }
 
     .btn-primary:hover {
       transform: translateY(-2px);
-      box-shadow: 0 18px 40px rgba(16, 185, 129, 0.6);
+      box-shadow: 0 18px 40px rgba(124, 58, 237, 0.8);
     }
 
     .btn-ghost {
@@ -318,9 +388,9 @@
       border-radius: var(--radius-pill);
       padding: 4px 10px;
       font-size: 12px;
-      color: var(--accent);
+      color: var(--accent-strong);
       background: rgba(15, 23, 42, 0.9);
-      border: 1px solid rgba(79, 209, 197, 0.5);
+      border: 1px solid rgba(168, 85, 247, 0.6);
       position: relative;
       overflow: hidden;
       cursor: default;
@@ -330,7 +400,7 @@
       content: "";
       position: absolute;
       inset: 0;
-      background: linear-gradient(120deg, transparent 0%, rgba(15, 23, 42, 0.9) 40%, transparent 100%);
+      background: linear-gradient(120deg, transparent 0%, rgba(49, 46, 129, 0.9) 40%, transparent 100%);
       mix-blend-mode: screen;
       opacity: 0.7;
       transform: translateX(-100%);
@@ -377,7 +447,7 @@
     .filter-btn.active {
       background: var(--accent-soft);
       color: var(--accent);
-      border-color: rgba(79, 209, 197, 0.7);
+      border-color: rgba(168, 85, 247, 0.7);
     }
 
     .projects-grid {
@@ -389,8 +459,8 @@
     .project-card {
       border-radius: 16px;
       padding: 12px 11px 13px;
-      background: rgba(15, 23, 42, 0.9);
-      border: 1px solid rgba(148, 163, 184, 0.4);
+      background: rgba(15, 23, 42, 0.92);
+      border: 1px solid rgba(148, 163, 184, 0.45);
       box-shadow: 0 16px 30px rgba(0, 0, 0, 0.5);
       transition: transform var(--transition-fast), box-shadow var(--transition-fast),
         border-color var(--transition-fast), background-color var(--transition-fast),
@@ -459,8 +529,8 @@
     .project-card:hover {
       transform: translateY(-3px);
       box-shadow: 0 22px 40px rgba(15, 23, 42, 0.9);
-      border-color: rgba(79, 209, 197, 0.8);
-      background-color: rgba(15, 23, 42, 1);
+      border-color: rgba(168, 85, 247, 0.9);
+      background-color: rgba(17, 24, 39, 1);
     }
 
     /* Experience */
@@ -653,6 +723,14 @@
   </style>
 </head>
 <body>
+  <!-- Phantom-style splash screen -->
+  <div id="splash">
+    <div class="splash-logo-wrap">
+      <div class="splash-logo">SM</div>
+      <div class="splash-text">Loading Resume</div>
+    </div>
+  </div>
+
   <header>
     <div class="nav-inner">
       <div class="logo">
@@ -680,17 +758,17 @@
       <section id="about">
         <div class="pill">
           <span class="pill-dot"></span>
-          <span>Online Resume for Electronics Stores</span>
+          <span>Online Resume for Tech / Electronics Stores</span>
         </div>
         <div class="hero-header">
           <div class="hero-title">
             I build, repair and understand modern tech.
           </div>
           <div class="hero-subtitle">
-            I’m <span>Samuele Mannarella</span>, a student with hands-on experience
+            I’m <span>Samuele Mannarella</span>, a CEGEP student with hands-on experience
             assembling and disassembling computers and phones, working in
             <span>Linux environments</span>, and navigating the
-            <span>crypto</span> world. This site is here to show you I can work
+            <span>crypto & finance</span> world. This site is here to show you I can work
             my way around technology, not just use it.
           </div>
           <div class="hero-highlight">
@@ -814,9 +892,9 @@
               <div class="project-type">Linux</div>
             </div>
             <p>
-              Installed a Linux distribution alongside Windows, created
+              Installed Arch Linux to emulate Windows using VFIO, created
               proper partitions, and configured the bootloader for daily
-              use without breaking the main system.
+              use without breaking the main system. Comfortable setting up Virtual environments. 
             </p>
             <div class="project-meta">
               <div class="project-tags">
@@ -835,7 +913,10 @@
             <p>
               Experimented with non-custodial wallets: generated seed
               phrases, secured them offline, made small test transfers, and
-              learned the basics of gas fees and network selection.
+              learned the basics of gas fees and network selection. 
+              Also worked with pump.fun, dexscreener, tradingview in Memecoins. 
+              Currently working on developing trading Algorithms, focusing on Portfolio Development. 
+              Comfortable around MetaTrader 5 PC & Desktop. 
             </p>
             <div class="project-meta">
               <div class="project-tags">
@@ -923,7 +1004,6 @@
       <div>© <span id="year"></span> Samuele M. All rights reserved.</div>
       <div class="footer-right">
         <span class="footer-badge">Built with HTML, CSS & JS</span>
-        <span class="footer-badge">Dark gradient • “SM” logo</span>
       </div>
     </footer>
   </div>
@@ -936,6 +1016,15 @@
   </button>
 
   <script>
+    // Splash screen: hide shortly after full load
+    window.addEventListener("load", () => {
+      const splash = document.getElementById("splash");
+      if (!splash) return;
+      setTimeout(() => {
+        splash.classList.add("hidden");
+      }, 900); // time before fade-out
+    });
+
     // Smooth scroll for nav and CTA buttons
     document.querySelectorAll(".nav-link, [data-scroll-target]").forEach((el) => {
       el.addEventListener("click", (e) => {
@@ -990,9 +1079,7 @@
       });
     }
 
-    // Run once on load
     window.addEventListener("load", animateSkillTags);
-    // Repeat every few seconds
     setInterval(animateSkillTags, 5000);
 
     // Project filter buttons
