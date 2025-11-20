@@ -2,23 +2,24 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Samuele M. – Tech Resume</title>
+  <title>samuele@terminal:~</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
     :root {
-      --bg-gradient: radial-gradient(circle at top, #251933 0%, #050312 45%, #020008 100%);
-      --accent: #a855f7;
-      --accent-soft: rgba(168, 85, 247, 0.16);
-      --accent-strong: #c4b5fd;
-      --text-main: #f9fafb;
-      --text-muted: #a1a1aa;
-      --card-bg: rgba(15, 23, 42, 0.9);
-      --border-subtle: rgba(148, 163, 184, 0.25);
-      --shadow-soft: 0 20px 40px rgba(0, 0, 0, 0.6);
-      --radius-lg: 18px;
+      --bg-main: #05070a;
+      --bg-terminal: #050910;
+      --bg-terminal-alt: #050910;
+      --border-terminal: #1f2933;
+      --text-main: #e5e5e5;
+      --text-muted: #6b7280;
+      --accent-green: #22c55e;
+      --accent-cyan: #22d3ee;
+      --accent-magenta: #e879f9;
+      --accent-yellow: #facc15;
+      --shadow-soft: 0 20px 40px rgba(0, 0, 0, 0.8);
+      --radius-lg: 12px;
       --radius-pill: 999px;
-      --transition-fast: 0.18s ease-out;
-      --transition-med: 0.25s ease-out;
+      --transition-fast: 0.15s ease-out;
     }
 
     * {
@@ -28,383 +29,251 @@
     }
 
     body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
-        "Segoe UI", sans-serif;
-      background: var(--bg-gradient);
-      color: var(--text-main);
       min-height: 100vh;
+      background:
+        radial-gradient(circle at top, #111827 0%, #020617 40%, #000000 100%);
+      color: var(--text-main);
+      font-family: "Fira Code", "JetBrains Mono", Menlo, Consolas, monospace;
       line-height: 1.6;
-      scroll-behavior: smooth;
+      padding: 18px 10px 40px;
+      display: flex;
+      justify-content: center;
     }
 
-    /* ─────────────────────────────────────
-       SPLASH SCREEN (Phantom-style logo)
-    ───────────────────────────────────── */
-    #splash {
+    .scanlines {
       position: fixed;
       inset: 0;
-      background:
-        radial-gradient(circle at top, rgba(88, 28, 135, 0.6) 0%, #020014 55%, #020008 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 999;
-      transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
-    }
-
-    #splash.hidden {
-      opacity: 0;
-      visibility: hidden;
-    }
-
-    .splash-logo-wrap {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .splash-logo {
-      width: 90px;
-      height: 90px;
-      border-radius: 28px;
-      background: radial-gradient(circle at 30% 20%, #e9d5ff 0%, #c4b5fd 20%, #4c1d95 70%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 800;
-      letter-spacing: 0.08em;
-      font-size: 28px;
-      color: #050017;
-      box-shadow:
-        0 0 0 1px rgba(248, 250, 252, 0.15),
-        0 18px 45px rgba(59, 7, 100, 0.9),
-        0 0 40px rgba(168, 85, 247, 0.8);
-      animation: splash-pop 1s ease-out infinite alternate;
-    }
-
-    .splash-text {
-      font-size: 12px;
-      text-transform: uppercase;
-      letter-spacing: 0.25em;
-      color: var(--text-muted);
-    }
-
-    @keyframes splash-pop {
-      0% {
-        transform: scale(0.96);
-        box-shadow:
-          0 0 0 1px rgba(248, 250, 252, 0.15),
-          0 14px 36px rgba(59, 7, 100, 0.7),
-          0 0 24px rgba(168, 85, 247, 0.6);
-      }
-      100% {
-        transform: scale(1.02);
-        box-shadow:
-          0 0 0 1px rgba(248, 250, 252, 0.25),
-          0 22px 55px rgba(76, 29, 149, 0.95),
-          0 0 46px rgba(216, 180, 254, 0.9);
-      }
-    }
-
-    /* Layout */
-    .page {
-      max-width: 1120px;
-      margin: 0 auto;
-      padding: 18px 16px 80px;
-    }
-
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 20;
-      backdrop-filter: blur(18px);
-      background: linear-gradient(
+      pointer-events: none;
+      background: repeating-linear-gradient(
         to bottom,
-        rgba(3, 0, 25, 0.9),
-        rgba(3, 0, 25, 0.18)
+        rgba(15, 23, 42, 0.18),
+        rgba(15, 23, 42, 0.18) 1px,
+        transparent 3px,
+        transparent 4px
       );
-      border-bottom: 1px solid rgba(148, 163, 184, 0.25);
+      mix-blend-mode: soft-light;
+      opacity: 0.65;
+      z-index: 0;
     }
 
-    .nav-inner {
-      max-width: 1120px;
-      margin: 0 auto;
-      padding: 10px 16px 10px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 18px;
-    }
-
-    /* Logo */
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .logo-mark {
-      width: 36px;
-      height: 36px;
-      border-radius: 16px;
-      background: radial-gradient(circle at 30% 20%, #f5e1ff 0%, #e9d5ff 20%, #4c1d95 70%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 800;
-      letter-spacing: 0.06em;
-      font-size: 18px;
-      color: #050017;
-      box-shadow: 0 8px 18px rgba(124, 58, 237, 0.7);
-    }
-
-    .logo-text {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-    }
-
-    .logo-text span:first-child {
-      font-size: 15px;
-      font-weight: 600;
-    }
-
-    .logo-text span:last-child {
-      font-size: 11px;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-    }
-
-    nav ul {
-      list-style: none;
-      display: flex;
-      gap: 12px;
-      font-size: 13px;
-    }
-
-    nav a {
-      color: var(--text-muted);
-      text-decoration: none;
-      padding: 7px 11px;
-      border-radius: 999px;
-      border: 1px solid transparent;
-      transition: color var(--transition-fast), border-color var(--transition-fast),
-        background-color var(--transition-fast), transform var(--transition-fast);
-    }
-
-    nav a:hover {
-      color: var(--accent);
-      border-color: rgba(148, 163, 184, 0.4);
-      background: rgba(15, 23, 42, 0.8);
-      transform: translateY(-1px);
-    }
-
-    nav a.active {
-      color: #020014;
-      background: var(--accent);
-      border-color: transparent;
-      font-weight: 600;
-    }
-
-    main {
-      margin-top: 26px;
-      display: grid;
-      gap: 22px;
-    }
-
-    section {
-      border-radius: var(--radius-lg);
-      background: radial-gradient(circle at top left, #020014 0, rgba(15, 23, 42, 0.9) 40%, #020008 100%);
-      border: 1px solid var(--border-subtle);
-      box-shadow: var(--shadow-soft);
-      padding: 20px 18px 22px;
+    .page {
       position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 1080px;
+    }
+
+    /* Terminal window shell */
+    .terminal-window {
+      background: radial-gradient(circle at top left, #020617 0, #02040a 55%, #000000 100%);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-terminal);
+      box-shadow: var(--shadow-soft);
       overflow: hidden;
     }
 
-    section::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at top right, rgba(168, 85, 247, 0.18), transparent 55%);
-      opacity: 0.5;
-      pointer-events: none;
-      mix-blend-mode: screen;
-    }
-
-    section > * {
-      position: relative;
-      z-index: 1;
-    }
-
-    section h2 {
-      font-size: 17px;
-      margin-bottom: 4px;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-    }
-
-    section h3 {
-      font-size: 22px;
-      margin-bottom: 8px;
-    }
-
-    .pill {
-      display: inline-flex;
+    .terminal-topbar {
+      display: flex;
       align-items: center;
+      justify-content: space-between;
+      padding: 7px 12px;
+      background: linear-gradient(to bottom, #020617, #050b13);
+      border-bottom: 1px solid #111827;
+    }
+
+    .traffic-lights {
+      display: flex;
       gap: 6px;
-      padding: 4px 10px;
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 0.14em;
-      border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.5);
+    }
+
+    .traffic-light {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #111827;
+      box-shadow: 0 0 0 1px #020617;
+    }
+
+    .traffic-light.red {
+      background: #ef4444;
+    }
+    .traffic-light.yellow {
+      background: #facc15;
+    }
+    .traffic-light.green {
+      background: #22c55e;
+    }
+
+    .terminal-title {
       color: var(--text-muted);
-      background: rgba(15, 23, 42, 0.75);
-      margin-bottom: 12px;
-    }
-
-    .pill-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 999px;
-      background: var(--accent);
-      box-shadow: 0 0 10px rgba(168, 85, 247, 0.9);
-    }
-
-    .hero-header {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    .hero-title {
-      font-size: 26px;
-      font-weight: 700;
-    }
-
-    .hero-subtitle {
-      font-size: 15px;
-      color: var(--text-muted);
-      max-width: 540px;
-    }
-
-    .hero-subtitle span {
-      color: var(--accent);
-      font-weight: 500;
-    }
-
-    .hero-highlight {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 10px;
       font-size: 12px;
     }
 
-    .hero-highlight span {
-      border-radius: var(--radius-pill);
-      padding: 4px 8px;
-      background: rgba(15, 23, 42, 0.9);
-      border: 1px solid rgba(148, 163, 184, 0.4);
+    .terminal-title span {
+      color: var(--accent-green);
+    }
+
+    .terminal-nav {
+      display: flex;
+      gap: 14px;
+      font-size: 11px;
       color: var(--text-muted);
     }
 
-    .hero-cta {
-      margin-top: 16px;
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    .btn {
-      border-radius: var(--radius-pill);
-      padding: 9px 14px;
-      font-size: 13px;
-      border: 1px solid transparent;
+    .terminal-nav a {
+      color: inherit;
+      text-decoration: none;
       cursor: pointer;
-      transition: transform var(--transition-med), box-shadow var(--transition-med),
-        background-color var(--transition-med), color var(--transition-med),
-        border-color var(--transition-med);
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
+      position: relative;
+      padding-bottom: 1px;
     }
 
-    .btn-primary {
-      background: linear-gradient(135deg, var(--accent), var(--accent-strong));
-      color: #020014;
-      font-weight: 600;
-      box-shadow: 0 14px 30px rgba(109, 40, 217, 0.6);
+    .terminal-nav a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -1px;
+      width: 0;
+      height: 1px;
+      background: var(--accent-cyan);
+      transition: width var(--transition-fast);
     }
 
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 18px 40px rgba(124, 58, 237, 0.8);
+    .terminal-nav a:hover::after,
+    .terminal-nav a.active::after {
+      width: 100%;
     }
 
-    .btn-ghost {
-      background: rgba(15, 23, 42, 0.8);
-      color: var(--text-muted);
-      border-color: rgba(148, 163, 184, 0.5);
+    .terminal-nav a.active {
+      color: var(--accent-cyan);
     }
 
-    .btn-ghost:hover {
-      background: rgba(15, 23, 42, 1);
-      color: var(--accent);
-      transform: translateY(-1px);
-    }
-
-    .btn svg {
-      width: 15px;
-      height: 15px;
-    }
-
-    .skills-grid {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      margin-top: 10px;
+    main {
+      padding: 16px 14px 18px;
+      background: var(--bg-terminal);
       font-size: 13px;
+    }
+
+    section {
+      margin-bottom: 20px;
+      padding: 10px 9px 10px;
+      background: rgba(15, 23, 42, 0.75);
+      border-radius: 8px;
+      border: 1px solid #111827;
+    }
+
+    section:last-of-type {
+      margin-bottom: 0;
+    }
+
+    .prompt-line {
+      color: var(--accent-green);
+      margin-bottom: 4px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .prompt-user {
+      color: var(--accent-green);
+    }
+    .prompt-path {
+      color: var(--accent-cyan);
+    }
+    .prompt-char {
+      color: var(--accent-yellow);
+    }
+    .prompt-command {
+      color: var(--accent-magenta);
+    }
+
+    /* Neofetch style hero */
+    .neofetch {
+      display: grid;
+      grid-template-columns: minmax(0, 210px) minmax(0, 1fr);
+      gap: 16px;
+    }
+
+    @media (max-width: 720px) {
+      .neofetch {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .neofetch-ascii {
+      font-size: 10px;
+      white-space: pre;
+      line-height: 1.1;
+      color: var(--accent-magenta);
+      text-shadow:
+        0 0 4px rgba(248, 250, 252, 0.3),
+        0 0 12px rgba(236, 72, 153, 0.6);
+    }
+
+    .neofetch-info {
+      color: var(--text-main);
+      font-size: 13px;
+    }
+
+    .nf-label {
+      color: var(--accent-cyan);
+      min-width: 90px;
+      display: inline-block;
+    }
+
+    .nf-row {
+      margin-bottom: 2px;
+    }
+
+    .nf-about {
+      margin-top: 8px;
+      color: var(--text-main);
+    }
+
+    .nf-about span {
+      color: var(--accent-green);
+    }
+
+    /* Skills as terminal list */
+    .skills-grid {
+      display: grid;
+      gap: 8px;
     }
 
     .skills-row-label {
-      font-size: 12px;
+      color: var(--accent-cyan);
       text-transform: uppercase;
-      letter-spacing: 0.16em;
-      color: var(--text-muted);
+      letter-spacing: 0.18em;
+      font-size: 10px;
+      margin-bottom: 3px;
     }
 
     .skill-tags {
       display: flex;
       flex-wrap: wrap;
-      gap: 8px;
+      gap: 6px;
     }
 
     .skill-tag {
       border-radius: var(--radius-pill);
-      padding: 4px 10px;
-      font-size: 12px;
-      color: var(--accent-strong);
-      background: rgba(15, 23, 42, 0.9);
-      border: 1px solid rgba(168, 85, 247, 0.6);
+      padding: 2px 8px;
+      border: 1px solid #1f2937;
+      background: #020617;
+      color: var(--accent-magenta);
+      font-size: 11px;
       position: relative;
       overflow: hidden;
-      cursor: default;
     }
 
     .skill-tag::after {
       content: "";
       position: absolute;
       inset: 0;
-      background: linear-gradient(120deg, transparent 0%, rgba(49, 46, 129, 0.9) 40%, transparent 100%);
+      background: linear-gradient(120deg, transparent 0%, rgba(148, 163, 184, 0.25) 40%, transparent 100%);
       mix-blend-mode: screen;
-      opacity: 0.7;
+      opacity: 0.6;
       transform: translateX(-100%);
-      transition: transform 0.5s ease-out;
+      transition: transform 0.4s ease-out;
     }
 
     .skill-tag.is-animated::after {
@@ -413,59 +282,61 @@
 
     /* Projects */
     .projects-header {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      gap: 10px;
-      align-items: center;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
     }
 
-    .projects-header p {
-      font-size: 13px;
+    .projects-header-text {
+      margin-bottom: 4px;
+    }
+
+    .projects-header-title {
+      color: var(--accent-green);
+    }
+
+    .projects-header-sub {
       color: var(--text-muted);
-      max-width: 420px;
+      margin-top: 2px;
     }
 
     .project-filters {
-      display: inline-flex;
-      gap: 6px;
+      margin-top: 6px;
+      display: flex;
       flex-wrap: wrap;
+      gap: 6px;
     }
 
     .filter-btn {
       border-radius: var(--radius-pill);
-      padding: 4px 10px;
-      font-size: 12px;
-      border: 1px solid rgba(148, 163, 184, 0.6);
-      background: rgba(15, 23, 42, 0.9);
+      padding: 2px 9px;
+      border: 1px solid #1f2937;
+      background: #020617;
       color: var(--text-muted);
+      font-size: 11px;
       cursor: pointer;
-      transition: all var(--transition-fast);
+      transition: background-color var(--transition-fast), color var(--transition-fast),
+        border-color var(--transition-fast);
     }
 
     .filter-btn.active {
-      background: var(--accent-soft);
-      color: var(--accent);
-      border-color: rgba(168, 85, 247, 0.7);
+      background: rgba(34, 197, 94, 0.16);
+      border-color: var(--accent-green);
+      color: var(--accent-green);
     }
 
     .projects-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-      gap: 12px;
+      gap: 10px;
+      margin-top: 6px;
     }
 
     .project-card {
-      border-radius: 16px;
-      padding: 12px 11px 13px;
-      background: rgba(15, 23, 42, 0.92);
-      border: 1px solid rgba(148, 163, 184, 0.45);
-      box-shadow: 0 16px 30px rgba(0, 0, 0, 0.5);
-      transition: transform var(--transition-fast), box-shadow var(--transition-fast),
-        border-color var(--transition-fast), background-color var(--transition-fast),
-        opacity 0.15s ease-out, visibility 0.15s ease-out;
-      position: relative;
+      border-radius: 8px;
+      border: 1px solid #111827;
+      background: #020617;
+      padding: 7px 8px 8px;
+      transition: border-color var(--transition-fast), transform var(--transition-fast),
+        box-shadow var(--transition-fast), opacity 0.15s ease-out, visibility 0.15s ease-out;
     }
 
     .project-card.hidden {
@@ -479,120 +350,106 @@
       display: flex;
       justify-content: space-between;
       gap: 6px;
-      align-items: center;
-      margin-bottom: 4px;
+      margin-bottom: 2px;
     }
 
     .project-title {
-      font-size: 15px;
-      font-weight: 600;
+      color: var(--accent-cyan);
+      font-size: 12px;
     }
 
     .project-type {
-      font-size: 11px;
-      padding: 3px 8px;
-      border-radius: 999px;
-      background: rgba(15, 23, 42, 0.95);
-      border: 1px solid rgba(148, 163, 184, 0.6);
+      font-size: 10px;
       color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
     }
 
     .project-card p {
-      font-size: 13px;
-      color: var(--text-muted);
-      margin-bottom: 6px;
+      margin-top: 2px;
+      font-size: 12px;
+      color: var(--text-main);
     }
 
     .project-meta {
+      margin-top: 4px;
       display: flex;
       justify-content: space-between;
       gap: 4px;
-      align-items: center;
-      font-size: 11px;
+      font-size: 10px;
       color: var(--text-muted);
     }
 
     .project-tags {
       display: flex;
-      flex-wrap: wrap;
       gap: 4px;
+      flex-wrap: wrap;
     }
 
     .project-tag-pill {
-      padding: 2px 7px;
+      padding: 1px 6px;
       border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.6);
+      border: 1px solid #1f2937;
     }
 
     .project-card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 22px 40px rgba(15, 23, 42, 0.9);
-      border-color: rgba(168, 85, 247, 0.9);
-      background-color: rgba(17, 24, 39, 1);
+      border-color: var(--accent-magenta);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 28px rgba(15, 23, 42, 0.9);
     }
 
     /* Experience */
     .experience-list {
-      margin-top: 8px;
       display: grid;
       grid-template-columns: 1.1fr 0.9fr;
-      gap: 18px;
+      gap: 10px;
     }
 
-    @media (max-width: 800px) {
+    @media (max-width: 780px) {
       .experience-list {
         grid-template-columns: 1fr;
       }
     }
 
     .experience-item {
-      padding: 10px 11px;
-      border-radius: 14px;
-      border: 1px solid rgba(148, 163, 184, 0.5);
-      background: rgba(15, 23, 42, 0.9);
-      font-size: 13px;
+      border-radius: 8px;
+      border: 1px solid #111827;
+      background: #020617;
+      padding: 7px 8px;
+      font-size: 12px;
+      color: var(--text-main);
     }
 
     .experience-header {
       display: flex;
       justify-content: space-between;
       gap: 4px;
-      align-items: baseline;
       margin-bottom: 4px;
     }
 
     .experience-role {
-      font-weight: 600;
+      color: var(--accent-cyan);
     }
 
     .experience-place {
-      font-size: 12px;
       color: var(--text-muted);
+      font-size: 11px;
     }
 
     .experience-dates {
+      color: var(--accent-green);
       font-size: 11px;
-      color: var(--text-muted);
-    }
-
-    .experience-points {
-      margin-top: 6px;
-      font-size: 13px;
-      color: var(--text-muted);
+      white-space: nowrap;
     }
 
     .experience-points span {
       display: block;
-      margin-bottom: 3px;
+      margin-bottom: 2px;
+      color: var(--text-main);
     }
 
     /* Contact */
     .contact-grid {
       display: grid;
-      gap: 18px;
-      margin-top: 8px;
+      gap: 8px;
     }
 
     @media (min-width: 720px) {
@@ -602,19 +459,18 @@
     }
 
     .contact-text {
-      font-size: 13px;
-      color: var(--text-muted);
+      font-size: 12px;
+      color: var(--text-main);
     }
 
     .contact-text strong {
-      color: var(--accent);
-      font-weight: 600;
+      color: var(--accent-green);
     }
 
     .contact-details {
-      font-size: 13px;
+      font-size: 12px;
       display: grid;
-      gap: 6px;
+      gap: 5px;
     }
 
     .contact-row {
@@ -625,17 +481,14 @@
 
     .contact-label {
       color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      font-size: 11px;
     }
 
     .contact-value {
-      font-weight: 500;
+      color: var(--accent-cyan);
     }
 
     .contact-value a {
-      color: var(--accent);
+      color: var(--accent-cyan);
       text-decoration: none;
     }
 
@@ -643,17 +496,14 @@
       text-decoration: underline;
     }
 
-    /* Footer */
+    /* Footer line */
     footer {
-      margin-top: 24px;
-      padding: 16px 0 0;
-      border-top: 1px solid rgba(148, 163, 184, 0.3);
+      margin-top: 10px;
       font-size: 11px;
       color: var(--text-muted);
       display: flex;
       justify-content: space-between;
-      gap: 10px;
-      flex-wrap: wrap;
+      gap: 8px;
     }
 
     .footer-right {
@@ -663,32 +513,34 @@
     }
 
     .footer-badge {
-      padding: 4px 9px;
+      padding: 1px 7px;
       border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.6);
+      border: 1px solid #1f2937;
+      background: #020617;
     }
 
-    /* Back to top button */
+    /* Back to top */
     .back-to-top {
       position: fixed;
-      right: 18px;
-      bottom: 18px;
-      width: 34px;
-      height: 34px;
-      border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.6);
-      background: rgba(15, 23, 42, 0.95);
+      right: 16px;
+      bottom: 16px;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 1px solid #1f2937;
+      background: #020617;
+      color: var(--accent-green);
       display: flex;
       align-items: center;
       justify-content: center;
-      color: var(--accent);
       cursor: pointer;
       opacity: 0;
-      transform: translateY(10px);
+      transform: translateY(8px);
       pointer-events: none;
       transition: opacity 0.2s ease-out, transform 0.2s ease-out;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.7);
-      z-index: 40;
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.8);
+      z-index: 5;
+      font-size: 16px;
     }
 
     .back-to-top.visible {
@@ -697,359 +549,343 @@
       pointer-events: auto;
     }
 
-    .back-to-top svg {
-      width: 18px;
-      height: 18px;
-    }
-
-    /* Responsive tweaks */
     @media (max-width: 640px) {
-      .hero-title {
-        font-size: 22px;
+      body {
+        padding: 12px 6px 26px;
+      }
+      main {
+        padding: 12px 10px 14px;
       }
       section {
-        padding: 16px 14px 19px;
-      }
-      .nav-inner {
-        gap: 10px;
-      }
-      nav ul {
-        gap: 8px;
-      }
-      nav a {
-        padding: 6px 9px;
+        padding: 9px 7px 8px;
       }
     }
   </style>
 </head>
 <body>
-  <!-- Phantom-style splash screen -->
-  <div id="splash">
-    <div class="splash-logo-wrap">
-      <div class="splash-logo">SM</div>
-      <div class="splash-text">Loading Resume</div>
-    </div>
-  </div>
-
-  <header>
-    <div class="nav-inner">
-      <div class="logo">
-        <div class="logo-mark">SM</div>
-        <div class="logo-text">
-          <span>Samuele M.</span>
-          <span>Tech Student & Builder</span>
-        </div>
-      </div>
-      <nav>
-        <ul>
-          <li><a href="#about" class="nav-link active">About</a></li>
-          <li><a href="#skills" class="nav-link">Skills</a></li>
-          <li><a href="#projects" class="nav-link">Projects</a></li>
-          <li><a href="#experience" class="nav-link">Experience</a></li>
-          <li><a href="#contact" class="nav-link">Contact</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
-
+  <div class="scanlines"></div>
   <div class="page">
-    <!-- ABOUT / HERO -->
-    <main>
-      <section id="about">
-        <div class="pill">
-          <span class="pill-dot"></span>
-          <span>Online Resume for Tech / Electronics Stores</span>
+    <div class="terminal-window">
+      <div class="terminal-topbar">
+        <div class="traffic-lights">
+          <div class="traffic-light red"></div>
+          <div class="traffic-light yellow"></div>
+          <div class="traffic-light green"></div>
         </div>
-        <div class="hero-header">
-          <div class="hero-title">
-            I build, repair and understand modern tech.
-          </div>
-          <div class="hero-subtitle">
-            I’m <span>Samuele Mannarella</span>, a CEGEP student with hands-on experience
-            assembling and disassembling computers and phones, working in
-            <span>Linux environments</span>, and navigating the
-            <span>crypto & finance</span> world. This site is here to show you I can work
-            my way around technology, not just use it.
-          </div>
-          <div class="hero-highlight">
-            <span>PC & Laptop assembly / upgrades</span>
-            <span>Smartphone repairs & diagnostics</span>
-            <span>Linux installs & basic terminal work</span>
-            <span>Crypto basics – wallets & safety</span>
-          </div>
-          <div class="hero-cta">
-            <button class="btn btn-primary" data-scroll-target="#projects">
-              <svg viewBox="0 0 24 24" fill="none">
-                <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="1.7"
-                  stroke-linecap="round" stroke-linejoin="round" />
-              </svg>
-              View my projects
-            </button>
-            <button class="btn btn-ghost" data-scroll-target="#contact">
-              Contact & details
-            </button>
-          </div>
+        <div class="terminal-title">
+          <span>samuele@linux</span>: ~/portfolio/sm_resume.sh
         </div>
-      </section>
-
-      <!-- SKILLS -->
-      <section id="skills">
-        <h2>Skills</h2>
-        <h3>What I bring to your team</h3>
-        <div class="skills-grid">
-          <div>
-            <div class="skills-row-label">Hardware & Repair</div>
-            <div class="skill-tags">
-              <span class="skill-tag">PC assembly & upgrades</span>
-              <span class="skill-tag">Laptop cleaning & repaste</span>
-              <span class="skill-tag">Phone disassembly</span>
-              <span class="skill-tag">Component diagnostics</span>
-            </div>
-          </div>
-          <div>
-            <div class="skills-row-label">Operating Systems & Tools</div>
-            <div class="skill-tags">
-              <span class="skill-tag">Linux desktop & CLI</span>
-              <span class="skill-tag">Dual-boot setup</span>
-              <span class="skill-tag">Basic scripting</span>
-              <span class="skill-tag">System troubleshooting</span>
-            </div>
-          </div>
-          <div>
-            <div class="skills-row-label">Digital & Crypto</div>
-            <div class="skill-tags">
-              <span class="skill-tag">Crypto wallets basics</span>
-              <span class="skill-tag">Exchange navigation</span>
-              <span class="skill-tag">Security awareness</span>
-              <span class="skill-tag">Responsible usage mindset</span>
-            </div>
-          </div>
+        <div class="terminal-nav">
+          <a href="#about" class="nav-link active">./about</a>
+          <a href="#skills" class="nav-link">./skills</a>
+          <a href="#projects" class="nav-link">./projects</a>
+          <a href="#experience" class="nav-link">./experience</a>
+          <a href="#contact" class="nav-link">./contact</a>
         </div>
-      </section>
-
-      <!-- PROJECTS -->
-      <section id="projects">
-        <div class="projects-header">
-          <div>
-            <h2>Projects</h2>
-            <h3>Hands-on work I’ve done</h3>
-            <p>
-              These are small but real projects I’ve done to build experience.
-              In a store environment, I want to bring this same curiosity and
-              reliability to your customers.
-            </p>
-          </div>
-          <div class="project-filters">
-            <button class="filter-btn active" data-filter="all">All</button>
-            <button class="filter-btn" data-filter="hardware">Hardware</button>
-            <button class="filter-btn" data-filter="linux">Linux</button>
-            <button class="filter-btn" data-filter="crypto">Crypto</button>
-          </div>
-        </div>
-
-        <div class="projects-grid">
-          <article class="project-card" data-category="hardware">
-            <div class="project-title-row">
-              <div class="project-title">Custom Gaming PC Build</div>
-              <div class="project-type">Hardware</div>
-            </div>
-            <p>
-              Selected compatible components, assembled a full system,
-              installed the OS, updated drivers, and tuned basic BIOS
-              settings for stable performance.
-            </p>
-            <div class="project-meta">
-              <div class="project-tags">
-                <span class="project-tag-pill">PC assembly</span>
-                <span class="project-tag-pill">Cable management</span>
-              </div>
-              <span>Completed 2024</span>
-            </div>
-          </article>
-
-          <article class="project-card" data-category="hardware">
-            <div class="project-title-row">
-              <div class="project-title">Smartphone Screen Swap</div>
-              <div class="project-type">Repair</div>
-            </div>
-            <p>
-              Disassembled a phone with a cracked display, replaced the
-              screen, reassembled carefully, and tested touch, camera, and
-              mic functionality.
-            </p>
-            <div class="project-meta">
-              <div class="project-tags">
-                <span class="project-tag-pill">Phone repair</span>
-                <span class="project-tag-pill">Fine tools</span>
-              </div>
-              <span>Personal device</span>
-            </div>
-          </article>
-
-          <article class="project-card" data-category="linux">
-            <div class="project-title-row">
-              <div class="project-title">Linux Dual-Boot Setup</div>
-              <div class="project-type">Linux</div>
-            </div>
-            <p>
-              Installed Arch Linux to emulate Windows using VFIO, created
-              proper partitions, and configured the bootloader for daily
-              use without breaking the main system. Comfortable setting up Virtual environments. 
-            </p>
-            <div class="project-meta">
-              <div class="project-tags">
-                <span class="project-tag-pill">Linux install</span>
-                <span class="project-tag-pill">Partitioning</span>
-              </div>
-              <span>Home laptop</span>
-            </div>
-          </article>
-
-          <article class="project-card" data-category="crypto">
-            <div class="project-title-row">
-              <div class="project-title">Crypto Wallet Setup</div>
-              <div class="project-type">Crypto</div>
-            </div>
-            <p>
-              Experimented with non-custodial wallets: generated seed
-              phrases, secured them offline, made small test transfers, and
-              learned the basics of gas fees and network selection. 
-              Also worked with pump.fun, dexscreener, tradingview in Memecoins. 
-              Currently working on developing trading Algorithms, focusing on Portfolio Development. 
-              Comfortable around MetaTrader 5 PC & Desktop. 
-            </p>
-            <div class="project-meta">
-              <div class="project-tags">
-                <span class="project-tag-pill">Wallets</span>
-                <span class="project-tag-pill">Security</span>
-              </div>
-              <span>Ongoing learning</span>
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <!-- EXPERIENCE -->
-      <section id="experience">
-        <h2>Experience</h2>
-        <h3>Where I’ve learned so far</h3>
-        <div class="experience-list">
-          <div class="experience-item">
-            <div class="experience-header">
-              <div>
-                <div class="experience-role">Student & Tech Enthusiast</div>
-                <div class="experience-place">High school & personal projects</div>
-              </div>
-              <div class="experience-dates">2023 – Present</div>
-            </div>
-            <div class="experience-points">
-              <span>• Helped friends and family with basic PC and phone troubleshooting.</span>
-              <span>• Performed small repairs: RAM upgrades, storage swaps, OS reinstalls.</span>
-              <span>• Built my first custom PC and started experimenting with Linux distributions.</span>
-            </div>
-          </div>
-
-          <div class="experience-item">
-            <div class="experience-header">
-              <div>
-                <div class="experience-role">Future Electronics Store Team Member</div>
-                <div class="experience-place">Your company?</div>
-              </div>
-              <div class="experience-dates">Open to start</div>
-            </div>
-            <div class="experience-points">
-              <span>• Looking for a place where I can support customers with real hardware and software issues.</span>
-              <span>• Eager to learn store procedures, ticketing systems, and customer service workflows.</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- CONTACT -->
-      <section id="contact">
-        <h2>Contact</h2>
-        <h3>Let’s talk</h3>
-        <div class="contact-grid">
-          <div class="contact-text">
-            I’m looking for opportunities in <strong>electronics, repair</strong> or
-            <strong>tech retail</strong>, where I can grow from real work while helping
-            customers understand and fix their devices.
-            <br /><br />
-            I’m comfortable around computers, phones, Linux, and basic crypto topics,
-            and I’m ready to learn whatever tools your store uses. I show up, ask
-            questions when I’m not sure, and take care of the details.
-          </div>
-          <div class="contact-details">
-            <div class="contact-row">
-              <div class="contact-label">Email</div>
-              <div class="contact-value">
-                <!-- Replace with Samuele's real email -->
-                <a href="mailto:samuele@example.com">sam.mnrl2008@gmail.com</a>
-              </div>
-            </div>
-            <div class="contact-row">
-              <div class="contact-label">Location</div>
-              <div class="contact-value">[Montreal, QC]</div>
-            </div>
-            <div class="contact-row">
-              <div class="contact-label">Available for</div>
-              <div class="contact-value">Part-time / student job / internship</div>
-            </div>
-          </div>
-        </div>
-      </section>
-    </main>
-
-    <footer>
-      <div>© <span id="year"></span> Samuele M. All rights reserved.</div>
-      <div class="footer-right">
-        <span class="footer-badge">Built with HTML, CSS & JS</span>
       </div>
-    </footer>
-  </div>
 
-  <button class="back-to-top" id="backToTop" aria-label="Back to top">
-    <svg viewBox="0 0 24 24" fill="none">
-      <path d="M12 5l-7 7m7-7l7 7M12 5v14" stroke="currentColor" stroke-width="1.7"
-        stroke-linecap="round" stroke-linejoin="round" />
-    </svg>
-  </button>
+      <main>
+        <!-- ABOUT / NEOFETCH -->
+        <section id="about">
+          <div class="prompt-line">
+            <span class="prompt-user">samuele@linux</span>:<span class="prompt-path">~</span>
+            <span class="prompt-char">$</span> <span class="prompt-command">neofetch</span>
+          </div>
+          <div class="neofetch">
+            <div class="neofetch-ascii">
+███████╗  ███╗   ███╗
+██╔════╝  ████╗ ████║
+███████╗  ██╔████╔██║
+╚════██║  ██║╚██╔╝██║
+███████║  ██║ ╚═╝ ██║
+╚══════╝  ╚═╝     ╚═╝
+            </div>
+            <div class="neofetch-info">
+              <div class="nf-row">
+                <span class="nf-label">user</span>: Samuele Mannarella
+              </div>
+              <div class="nf-row">
+                <span class="nf-label">host</span>: CEGEP Student
+              </div>
+              <div class="nf-row">
+                <span class="nf-label">distro</span>: Arch (btw, via VFIO 😏)
+              </div>
+              <div class="nf-row">
+                <span class="nf-label">kernel</span>: tech / hardware / crypto
+              </div>
+              <div class="nf-row">
+                <span class="nf-label">shell</span>: bash, terminal, curiosity
+              </div>
+              <div class="nf-row">
+                <span class="nf-label">editor</span>: VS Code, nano (when needed)
+              </div>
+              <div class="nf-row">
+                <span class="nf-label">uptime</span>: building & breaking stuff since 2008
+              </div>
+
+              <div class="nf-about">
+                I’m <span>Samuele Mannarella</span>, a CEGEP student with hands-on experience
+                assembling and disassembling computers and phones, working in Linux
+                environments, and navigating the crypto &amp; finance world.
+                This site is here to show you I can work my way around technology,
+                not just use it.
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- SKILLS -->
+        <section id="skills">
+          <div class="prompt-line">
+            <span class="prompt-user">samuele@linux</span>:<span class="prompt-path">~/skills</span>
+            <span class="prompt-char">$</span> <span class="prompt-command">cat skillset.txt</span>
+          </div>
+          <div class="skills-grid">
+            <div>
+              <div class="skills-row-label">Hardware & Repair</div>
+              <div class="skill-tags">
+                <span class="skill-tag">PC assembly & upgrades</span>
+                <span class="skill-tag">Laptop cleaning & repaste</span>
+                <span class="skill-tag">Phone disassembly</span>
+                <span class="skill-tag">Component diagnostics</span>
+              </div>
+            </div>
+            <div>
+              <div class="skills-row-label">Operating Systems & Tools</div>
+              <div class="skill-tags">
+                <span class="skill-tag">Linux desktop & CLI</span>
+                <span class="skill-tag">Arch + VFIO passthrough</span>
+                <span class="skill-tag">Dual-boot setup</span>
+                <span class="skill-tag">Virtual environments</span>
+                <span class="skill-tag">System troubleshooting</span>
+              </div>
+            </div>
+            <div>
+              <div class="skills-row-label">Crypto & Finance</div>
+              <div class="skill-tags">
+                <span class="skill-tag">Non-custodial wallets</span>
+                <span class="skill-tag">pump.fun / dexscreener</span>
+                <span class="skill-tag">TradingView charts</span>
+                <span class="skill-tag">MetaTrader 5</span>
+                <span class="skill-tag">Portfolio strategies</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- PROJECTS -->
+        <section id="projects">
+          <div class="prompt-line">
+            <span class="prompt-user">samuele@linux</span>:<span class="prompt-path">~/projects</span>
+            <span class="prompt-char">$</span> <span class="prompt-command">ls -la</span>
+          </div>
+          <div class="projects-header">
+            <div class="projects-header-text">
+              <div class="projects-header-title">total 4</div>
+              <div class="projects-header-sub">
+                Small but real projects I’ve done so far. In a store environment, I want to bring
+                the same curiosity, calm troubleshooting, and willingness to learn.
+              </div>
+            </div>
+            <div class="project-filters">
+              <button class="filter-btn active" data-filter="all">[ all ]</button>
+              <button class="filter-btn" data-filter="hardware">[ hardware ]</button>
+              <button class="filter-btn" data-filter="linux">[ linux ]</button>
+              <button class="filter-btn" data-filter="crypto">[ crypto ]</button>
+            </div>
+          </div>
+
+          <div class="projects-grid">
+            <article class="project-card" data-category="hardware">
+              <div class="project-title-row">
+                <div class="project-title">Custom Gaming PC Build</div>
+                <div class="project-type">drwxr-xr-x hardware</div>
+              </div>
+              <p>
+                Selected compatible components, assembled a full system, installed the OS,
+                updated drivers, and tuned basic BIOS settings for stable performance.
+              </p>
+              <div class="project-meta">
+                <div class="project-tags">
+                  <span class="project-tag-pill">PC assembly</span>
+                  <span class="project-tag-pill">Cable management</span>
+                </div>
+                <span>Completed 2024</span>
+              </div>
+            </article>
+
+            <article class="project-card" data-category="hardware">
+              <div class="project-title-row">
+                <div class="project-title">Smartphone Screen Swap</div>
+                <div class="project-type">-rw-r--r-- repair</div>
+              </div>
+              <p>
+                Disassembled a phone with a cracked display, replaced the screen, reassembled
+                carefully, and tested touch, camera, and mic functionality.
+              </p>
+              <div class="project-meta">
+                <div class="project-tags">
+                  <span class="project-tag-pill">Phone repair</span>
+                  <span class="project-tag-pill">Fine tools</span>
+                </div>
+                <span>Personal device</span>
+              </div>
+            </article>
+
+            <article class="project-card" data-category="linux">
+              <div class="project-title-row">
+                <div class="project-title">Arch Linux + VFIO Setup</div>
+                <div class="project-type">drwxr-xr-x linux</div>
+              </div>
+              <p>
+                Installed Arch Linux to emulate Windows using VFIO, created proper partitions,
+                and configured the bootloader for daily use without breaking the main system.
+                Comfortable setting up virtual environments and keeping things stable.
+              </p>
+              <div class="project-meta">
+                <div class="project-tags">
+                  <span class="project-tag-pill">Arch Linux</span>
+                  <span class="project-tag-pill">VFIO passthrough</span>
+                  <span class="project-tag-pill">Bootloader config</span>
+                </div>
+                <span>Daily driver</span>
+              </div>
+            </article>
+
+            <article class="project-card" data-category="crypto">
+              <div class="project-title-row">
+                <div class="project-title">Crypto & Trading Sandbox</div>
+                <div class="project-type">-rw-r--r-- crypto</div>
+              </div>
+              <p>
+                Experimented with non-custodial wallets: generated seed phrases, secured them
+                offline, made small test transfers, and learned the basics of gas fees and
+                network selection. Also worked with pump.fun, dexscreener and TradingView in
+                the Memecoins space. Currently working on developing trading algorithms with
+                a focus on portfolio development. Comfortable around MetaTrader 5 on PC &amp; desktop.
+              </p>
+              <div class="project-meta">
+                <div class="project-tags">
+                  <span class="project-tag-pill">Wallets</span>
+                  <span class="project-tag-pill">pump.fun</span>
+                  <span class="project-tag-pill">Dexscreener</span>
+                  <span class="project-tag-pill">TradingView</span>
+                </div>
+                <span>Ongoing learning</span>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <!-- EXPERIENCE -->
+        <section id="experience">
+          <div class="prompt-line">
+            <span class="prompt-user">samuele@linux</span>:<span class="prompt-path">~/experience</span>
+            <span class="prompt-char">$</span> <span class="prompt-command">history | tail -n 2</span>
+          </div>
+          <div class="experience-list">
+            <div class="experience-item">
+              <div class="experience-header">
+                <div>
+                  <div class="experience-role">Student &amp; Tech Enthusiast</div>
+                  <div class="experience-place">CEGEP + personal projects</div>
+                </div>
+                <div class="experience-dates">2023 – Present</div>
+              </div>
+              <div class="experience-points">
+                <span>• Helped friends and family with basic PC and phone troubleshooting.</span>
+                <span>• Performed small repairs: RAM upgrades, storage swaps, OS reinstalls.</span>
+                <span>• Built custom hardware setups and started experimenting with Linux distributions.</span>
+              </div>
+            </div>
+
+            <div class="experience-item">
+              <div class="experience-header">
+                <div>
+                  <div class="experience-role">Future Electronics Store Team Member</div>
+                  <div class="experience-place">Your company?</div>
+                </div>
+                <div class="experience-dates">Open to start</div>
+              </div>
+              <div class="experience-points">
+                <span>• Looking for a place where I can support customers with real hardware and software issues.</span>
+                <span>• Eager to learn store procedures, ticketing systems, and customer service workflows.</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- CONTACT -->
+        <section id="contact">
+          <div class="prompt-line">
+            <span class="prompt-user">samuele@linux</span>:<span class="prompt-path">~/contact</span>
+            <span class="prompt-char">$</span> <span class="prompt-command">cat info.yaml</span>
+          </div>
+          <div class="contact-grid">
+            <div class="contact-text">
+              I’m looking for opportunities in <strong>electronics, repair</strong> or
+              <strong>tech retail</strong>, where I can grow from real work while helping
+              customers understand and fix their devices.
+              <br /><br />
+              I’m comfortable around computers, phones, Linux, and the basics of crypto and
+              trading platforms. I’m ready to learn your tools, follow procedures, and ask
+              questions when I’m not sure instead of guessing.
+            </div>
+            <div class="contact-details">
+              <div class="contact-row">
+                <div class="contact-label">email</div>
+                <div class="contact-value">
+                  <a href="mailto:sam.mnrl2008@gmail.com">sam.mnrl2008@gmail.com</a>
+                </div>
+              </div>
+              <div class="contact-row">
+                <div class="contact-label">location</div>
+                <div class="contact-value">Montreal, QC</div>
+              </div>
+              <div class="contact-row">
+                <div class="contact-label">available_for</div>
+                <div class="contact-value">Part-time / student job / internship</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <footer>
+          <div>© <span id="year"></span> samuele@linux ▓▒░ all rights reserved</div>
+          <div class="footer-right">
+            <span class="footer-badge">HTML • CSS • JS</span>
+            <span class="footer-badge">Neofetch-style terminal UI</span>
+          </div>
+        </footer>
+      </main>
+    </div>
+
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
+  </div>
 
   <script>
-    // Splash screen: hide shortly after full load
-    window.addEventListener("load", () => {
-      const splash = document.getElementById("splash");
-      if (!splash) return;
-      setTimeout(() => {
-        splash.classList.add("hidden");
-      }, 900); // time before fade-out
-    });
-
-    // Smooth scroll for nav and CTA buttons
-    document.querySelectorAll(".nav-link, [data-scroll-target]").forEach((el) => {
+    // Smooth scroll for nav "commands"
+    document.querySelectorAll(".nav-link").forEach((el) => {
       el.addEventListener("click", (e) => {
         e.preventDefault();
-        const targetId =
-          el.getAttribute("href") || el.getAttribute("data-scroll-target");
-        const targetEl = document.querySelector(targetId);
+        const href = el.getAttribute("href");
+        const targetEl = document.querySelector(href);
         if (targetEl) {
-          const offset = 70; // roughly header height
           const rect = targetEl.getBoundingClientRect();
           const scrollTop = window.scrollY || document.documentElement.scrollTop;
-          const top = rect.top + scrollTop - offset;
+          const top = rect.top + scrollTop - 70;
           window.scrollTo({ top, behavior: "smooth" });
         }
       });
     });
 
-    // Highlight active nav item on scroll
+    // Highlight active nav on scroll
     const sections = Array.from(document.querySelectorAll("main section"));
     const navLinks = Array.from(document.querySelectorAll(".nav-link"));
 
     function updateActiveNav() {
       const scrollPos = window.scrollY || document.documentElement.scrollTop;
       let currentId = sections[0]?.id;
-
       sections.forEach((sec) => {
         const rect = sec.getBoundingClientRect();
         const offsetTop = rect.top + scrollPos;
@@ -1057,7 +893,6 @@
           currentId = sec.id;
         }
       });
-
       navLinks.forEach((link) => {
         const href = link.getAttribute("href");
         link.classList.toggle("active", href === `#${currentId}`);
@@ -1069,27 +904,24 @@
 
     // Animated skill tags
     const skillTags = Array.from(document.querySelectorAll(".skill-tag"));
-
     function animateSkillTags() {
       skillTags.forEach((tag, index) => {
         setTimeout(() => {
           tag.classList.add("is-animated");
-          setTimeout(() => tag.classList.remove("is-animated"), 550);
+          setTimeout(() => tag.classList.remove("is-animated"), 450);
         }, index * 70);
       });
     }
-
     window.addEventListener("load", animateSkillTags);
-    setInterval(animateSkillTags, 5000);
+    setInterval(animateSkillTags, 4800);
 
-    // Project filter buttons
+    // Project filters
     const filterButtons = Array.from(document.querySelectorAll(".filter-btn"));
     const projectCards = Array.from(document.querySelectorAll(".project-card"));
 
     filterButtons.forEach((btn) => {
       btn.addEventListener("click", () => {
         const filter = btn.getAttribute("data-filter");
-
         filterButtons.forEach((b) => b.classList.remove("active"));
         btn.classList.add("active");
 
@@ -1114,12 +946,11 @@
         backToTopBtn.classList.remove("visible");
       }
     });
-
     backToTopBtn.addEventListener("click", () => {
       window.scrollTo({ top: 0, behavior: "smooth" });
     });
 
-    // Footer year
+    // Year
     document.getElementById("year").textContent =
       new Date().getFullYear().toString();
   </script>
