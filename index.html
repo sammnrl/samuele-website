@@ -1,90 +1,1040 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>$UNICORN</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-            background: linear-gradient(135deg, #1a0033, #5e3bff, #f7c6ff);
-            color: white;
-            text-align: center;
-        }
-        header {
-            padding: 40px 20px;
-        }
-        h1 {
-            font-size: 3rem;
-            margin-bottom: 10px;
-        }
-        p.subtitle {
-            font-size: 1.2rem;
-            opacity: 0.8;
-            margin-top: 0;
-        }
-        .hero-image {
-            width: 80%;
-            max-width: 600px;
-            border-radius: 20px;
-            margin: 30px auto;
-            display: block;
-            box-shadow: 0 0 25px rgba(255,255,255,0.4);
-        }
-        .section {
-            padding: 40px 20px;
-        }
-        .section h2 {
-            font-size: 2rem;
-            margin-bottom: 20px;
-        }
-        .gallery {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-        .gallery img {
-            width: 300px;
-            border-radius: 15px;
-            box-shadow: 0 0 20px rgba(255,255,255,0.3);
-        }
-        footer {
-            margin-top: 50px;
-            padding: 20px;
-            background: rgba(0,0,0,0.3);
-            font-size: 0.9rem;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <title>Samuele Mannarella – Tech Resume</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    :root {
+      --bg-gradient: radial-gradient(circle at top, #23293f 0%, #050611 45%, #020308 100%);
+      --accent: #4fd1c5;
+      --accent-soft: rgba(79, 209, 197, 0.16);
+      --accent-strong: #22c55e;
+      --text-main: #f9fafb;
+      --text-muted: #9ca3af;
+      --card-bg: rgba(15, 23, 42, 0.9);
+      --border-subtle: rgba(148, 163, 184, 0.25);
+      --shadow-soft: 0 20px 40px rgba(0, 0, 0, 0.6);
+      --radius-lg: 18px;
+      --radius-pill: 999px;
+      --transition-fast: 0.18s ease-out;
+      --transition-med: 0.25s ease-out;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+        "Segoe UI", sans-serif;
+      background: var(--bg-gradient);
+      color: var(--text-main);
+      min-height: 100vh;
+      line-height: 1.6;
+      scroll-behavior: smooth;
+    }
+
+    /* Layout */
+    .page {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 18px 16px 80px;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(18px);
+      background: linear-gradient(
+        to bottom,
+        rgba(3, 7, 18, 0.9),
+        rgba(3, 7, 18, 0.2)
+      );
+      border-bottom: 1px solid rgba(148, 163, 184, 0.25);
+    }
+
+    .nav-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 10px 16px 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    /* Logo */
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-mark {
+      width: 36px;
+      height: 36px;
+      border-radius: 16px;
+      background: radial-gradient(circle at 30% 20%, #6ee7b7 0%, #22c55e 20%, #0f172a 70%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      font-size: 18px;
+      color: #020617;
+      box-shadow: 0 8px 18px rgba(16, 185, 129, 0.4);
+    }
+
+    .logo-text {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .logo-text span:first-child {
+      font-size: 15px;
+      font-weight: 600;
+    }
+
+    .logo-text span:last-child {
+      font-size: 11px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 12px;
+      font-size: 13px;
+    }
+
+    nav a {
+      color: var(--text-muted);
+      text-decoration: none;
+      padding: 7px 11px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      transition: color var(--transition-fast), border-color var(--transition-fast),
+        background-color var(--transition-fast), transform var(--transition-fast);
+    }
+
+    nav a:hover {
+      color: var(--accent);
+      border-color: rgba(148, 163, 184, 0.4);
+      background: rgba(15, 23, 42, 0.8);
+      transform: translateY(-1px);
+    }
+
+    nav a.active {
+      color: #0f172a;
+      background: var(--accent);
+      border-color: transparent;
+      font-weight: 600;
+    }
+
+    main {
+      margin-top: 26px;
+      display: grid;
+      gap: 22px;
+    }
+
+    section {
+      border-radius: var(--radius-lg);
+      background: radial-gradient(circle at top left, #0b1120 0, rgba(15, 23, 42, 0.9) 40%, #020617 100%);
+      border: 1px solid var(--border-subtle);
+      box-shadow: var(--shadow-soft);
+      padding: 20px 18px 22px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    section::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top right, rgba(79, 209, 197, 0.18), transparent 55%);
+      opacity: 0.45;
+      pointer-events: none;
+      mix-blend-mode: screen;
+    }
+
+    section > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    section h2 {
+      font-size: 17px;
+      margin-bottom: 4px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    section h3 {
+      font-size: 22px;
+      margin-bottom: 8px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      color: var(--text-muted);
+      background: rgba(15, 23, 42, 0.75);
+      margin-bottom: 12px;
+    }
+
+    .pill-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: var(--accent-strong);
+      box-shadow: 0 0 10px rgba(34, 197, 94, 0.7);
+    }
+
+    .hero-header {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .hero-title {
+      font-size: 26px;
+      font-weight: 700;
+    }
+
+    .hero-subtitle {
+      font-size: 15px;
+      color: var(--text-muted);
+      max-width: 540px;
+    }
+
+    .hero-subtitle span {
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    .hero-highlight {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+      font-size: 12px;
+    }
+
+    .hero-highlight span {
+      border-radius: var(--radius-pill);
+      padding: 4px 8px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      color: var(--text-muted);
+    }
+
+    .hero-cta {
+      margin-top: 16px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      border-radius: var(--radius-pill);
+      padding: 9px 14px;
+      font-size: 13px;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: transform var(--transition-med), box-shadow var(--transition-med),
+        background-color var(--transition-med), color var(--transition-med),
+        border-color var(--transition-med);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+      color: #020617;
+      font-weight: 600;
+      box-shadow: 0 14px 30px rgba(16, 185, 129, 0.45);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 18px 40px rgba(16, 185, 129, 0.6);
+    }
+
+    .btn-ghost {
+      background: rgba(15, 23, 42, 0.8);
+      color: var(--text-muted);
+      border-color: rgba(148, 163, 184, 0.5);
+    }
+
+    .btn-ghost:hover {
+      background: rgba(15, 23, 42, 1);
+      color: var(--accent);
+      transform: translateY(-1px);
+    }
+
+    .btn svg {
+      width: 15px;
+      height: 15px;
+    }
+
+    .skills-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 10px;
+      font-size: 13px;
+    }
+
+    .skills-row-label {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--text-muted);
+    }
+
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .skill-tag {
+      border-radius: var(--radius-pill);
+      padding: 4px 10px;
+      font-size: 12px;
+      color: var(--accent);
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(79, 209, 197, 0.5);
+      position: relative;
+      overflow: hidden;
+      cursor: default;
+    }
+
+    .skill-tag::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(120deg, transparent 0%, rgba(15, 23, 42, 0.9) 40%, transparent 100%);
+      mix-blend-mode: screen;
+      opacity: 0.7;
+      transform: translateX(-100%);
+      transition: transform 0.5s ease-out;
+    }
+
+    .skill-tag.is-animated::after {
+      transform: translateX(100%);
+    }
+
+    /* Projects */
+    .projects-header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .projects-header p {
+      font-size: 13px;
+      color: var(--text-muted);
+      max-width: 420px;
+    }
+
+    .project-filters {
+      display: inline-flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      border-radius: var(--radius-pill);
+      padding: 4px 10px;
+      font-size: 12px;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      background: rgba(15, 23, 42, 0.9);
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all var(--transition-fast);
+    }
+
+    .filter-btn.active {
+      background: var(--accent-soft);
+      color: var(--accent);
+      border-color: rgba(79, 209, 197, 0.7);
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 12px;
+    }
+
+    .project-card {
+      border-radius: 16px;
+      padding: 12px 11px 13px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      box-shadow: 0 16px 30px rgba(0, 0, 0, 0.5);
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast),
+        border-color var(--transition-fast), background-color var(--transition-fast),
+        opacity 0.15s ease-out, visibility 0.15s ease-out;
+      position: relative;
+    }
+
+    .project-card.hidden {
+      opacity: 0;
+      visibility: hidden;
+      transform: scale(0.97);
+      pointer-events: none;
+    }
+
+    .project-title-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 6px;
+      align-items: center;
+      margin-bottom: 4px;
+    }
+
+    .project-title {
+      font-size: 15px;
+      font-weight: 600;
+    }
+
+    .project-type {
+      font-size: 11px;
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.95);
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .project-card p {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    .project-meta {
+      display: flex;
+      justify-content: space-between;
+      gap: 4px;
+      align-items: center;
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+    }
+
+    .project-tag-pill {
+      padding: 2px 7px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+    }
+
+    .project-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 22px 40px rgba(15, 23, 42, 0.9);
+      border-color: rgba(79, 209, 197, 0.8);
+      background-color: rgba(15, 23, 42, 1);
+    }
+
+    /* Experience */
+    .experience-list {
+      margin-top: 8px;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 18px;
+    }
+
+    @media (max-width: 800px) {
+      .experience-list {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .experience-item {
+      padding: 10px 11px;
+      border-radius: 14px;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      background: rgba(15, 23, 42, 0.9);
+      font-size: 13px;
+    }
+
+    .experience-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 4px;
+      align-items: baseline;
+      margin-bottom: 4px;
+    }
+
+    .experience-role {
+      font-weight: 600;
+    }
+
+    .experience-place {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .experience-dates {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .experience-points {
+      margin-top: 6px;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .experience-points span {
+      display: block;
+      margin-bottom: 3px;
+    }
+
+    /* Contact */
+    .contact-grid {
+      display: grid;
+      gap: 18px;
+      margin-top: 8px;
+    }
+
+    @media (min-width: 720px) {
+      .contact-grid {
+        grid-template-columns: 1.2fr 0.8fr;
+      }
+    }
+
+    .contact-text {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .contact-text strong {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .contact-details {
+      font-size: 13px;
+      display: grid;
+      gap: 6px;
+    }
+
+    .contact-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .contact-label {
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-size: 11px;
+    }
+
+    .contact-value {
+      font-weight: 500;
+    }
+
+    .contact-value a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .contact-value a:hover {
+      text-decoration: underline;
+    }
+
+    /* Footer */
+    footer {
+      margin-top: 24px;
+      padding: 16px 0 0;
+      border-top: 1px solid rgba(148, 163, 184, 0.3);
+      font-size: 11px;
+      color: var(--text-muted);
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .footer-right {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .footer-badge {
+      padding: 4px 9px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+    }
+
+    /* Back to top button */
+    .back-to-top {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      width: 34px;
+      height: 34px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      background: rgba(15, 23, 42, 0.95);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent);
+      cursor: pointer;
+      opacity: 0;
+      transform: translateY(10px);
+      pointer-events: none;
+      transition: opacity 0.2s ease-out, transform 0.2s ease-out;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.7);
+      z-index: 40;
+    }
+
+    .back-to-top.visible {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    .back-to-top svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    /* Responsive tweaks */
+    @media (max-width: 640px) {
+      .hero-title {
+        font-size: 22px;
+      }
+      section {
+        padding: 16px 14px 19px;
+      }
+      .nav-inner {
+        gap: 10px;
+      }
+      nav ul {
+        gap: 8px;
+      }
+      nav a {
+        padding: 6px 9px;
+      }
+    }
+  </style>
 </head>
 <body>
-
-<header>
-    <h1>Unicorn Starlight</h1>
-    <p class="subtitle">CA:1029290403956096090940923409</p>
-</header>
-
-<!-- MAIN HERO IMAGE -->
-<img src="uni5.png" alt="Starlight Unicorn" class="hero-image" />
-
-<section class="section">
-    <h2>The Magic Begins Here</h2>
-    <p>CA:1029290403956096090940923409</p>
-</section>
-
-<section class="section">
-    <h2>✨ Cool Unicorns</h2>
-    <div class="gallery">
-        <img src="uni1.png" alt="Starlight Unicorn Art 1" />
-        <img src="uni5.png" alt="Starlight Unicorn Art 2" />
+  <header>
+    <div class="nav-inner">
+      <div class="logo">
+        <div class="logo-mark">SM</div>
+        <div class="logo-text">
+          <span>Samuele M.</span>
+          <span>Tech Student & Builder</span>
+        </div>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="#about" class="nav-link active">About</a></li>
+          <li><a href="#skills" class="nav-link">Skills</a></li>
+          <li><a href="#projects" class="nav-link">Projects</a></li>
+          <li><a href="#experience" class="nav-link">Experience</a></li>
+          <li><a href="#contact" class="nav-link">Contact</a></li>
+        </ul>
+      </nav>
     </div>
-</section>
+  </header>
 
-<footer>
-    © 2025 Starlight Crypto — Shine On ✨
-</footer>
+  <div class="page">
+    <!-- ABOUT / HERO -->
+    <main>
+      <section id="about">
+        <div class="pill">
+          <span class="pill-dot"></span>
+          <span>Online Resume for Electronics Stores</span>
+        </div>
+        <div class="hero-header">
+          <div class="hero-title">
+            I build, repair and understand modern tech.
+          </div>
+          <div class="hero-subtitle">
+            I’m <span>Samuele Mannarella</span>, a student with hands-on experience
+            assembling and disassembling computers and phones, working in
+            <span>Linux environments</span>, and navigating the
+            <span>crypto</span> world. This site is here to show you I can work
+            my way around technology, not just use it.
+          </div>
+          <div class="hero-highlight">
+            <span>PC & Laptop assembly / upgrades</span>
+            <span>Smartphone repairs & diagnostics</span>
+            <span>Linux installs & basic terminal work</span>
+            <span>Crypto basics – wallets & safety</span>
+          </div>
+          <div class="hero-cta">
+            <button class="btn btn-primary" data-scroll-target="#projects">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="1.7"
+                  stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+              View my projects
+            </button>
+            <button class="btn btn-ghost" data-scroll-target="#contact">
+              Contact & details
+            </button>
+          </div>
+        </div>
+      </section>
 
+      <!-- SKILLS -->
+      <section id="skills">
+        <h2>Skills</h2>
+        <h3>What I bring to your team</h3>
+        <div class="skills-grid">
+          <div>
+            <div class="skills-row-label">Hardware & Repair</div>
+            <div class="skill-tags">
+              <span class="skill-tag">PC assembly & upgrades</span>
+              <span class="skill-tag">Laptop cleaning & repaste</span>
+              <span class="skill-tag">Phone disassembly</span>
+              <span class="skill-tag">Component diagnostics</span>
+            </div>
+          </div>
+          <div>
+            <div class="skills-row-label">Operating Systems & Tools</div>
+            <div class="skill-tags">
+              <span class="skill-tag">Linux desktop & CLI</span>
+              <span class="skill-tag">Dual-boot setup</span>
+              <span class="skill-tag">Basic scripting</span>
+              <span class="skill-tag">System troubleshooting</span>
+            </div>
+          </div>
+          <div>
+            <div class="skills-row-label">Digital & Crypto</div>
+            <div class="skill-tags">
+              <span class="skill-tag">Crypto wallets basics</span>
+              <span class="skill-tag">Exchange navigation</span>
+              <span class="skill-tag">Security awareness</span>
+              <span class="skill-tag">Responsible usage mindset</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PROJECTS -->
+      <section id="projects">
+        <div class="projects-header">
+          <div>
+            <h2>Projects</h2>
+            <h3>Hands-on work I’ve done</h3>
+            <p>
+              These are small but real projects I’ve done to build experience.
+              In a store environment, I want to bring this same curiosity and
+              reliability to your customers.
+            </p>
+          </div>
+          <div class="project-filters">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="hardware">Hardware</button>
+            <button class="filter-btn" data-filter="linux">Linux</button>
+            <button class="filter-btn" data-filter="crypto">Crypto</button>
+          </div>
+        </div>
+
+        <div class="projects-grid">
+          <article class="project-card" data-category="hardware">
+            <div class="project-title-row">
+              <div class="project-title">Custom Gaming PC Build</div>
+              <div class="project-type">Hardware</div>
+            </div>
+            <p>
+              Selected compatible components, assembled a full system,
+              installed the OS, updated drivers, and tuned basic BIOS
+              settings for stable performance.
+            </p>
+            <div class="project-meta">
+              <div class="project-tags">
+                <span class="project-tag-pill">PC assembly</span>
+                <span class="project-tag-pill">Cable management</span>
+              </div>
+              <span>Completed 2024</span>
+            </div>
+          </article>
+
+          <article class="project-card" data-category="hardware">
+            <div class="project-title-row">
+              <div class="project-title">Smartphone Screen Swap</div>
+              <div class="project-type">Repair</div>
+            </div>
+            <p>
+              Disassembled a phone with a cracked display, replaced the
+              screen, reassembled carefully, and tested touch, camera, and
+              mic functionality.
+            </p>
+            <div class="project-meta">
+              <div class="project-tags">
+                <span class="project-tag-pill">Phone repair</span>
+                <span class="project-tag-pill">Fine tools</span>
+              </div>
+              <span>Personal device</span>
+            </div>
+          </article>
+
+          <article class="project-card" data-category="linux">
+            <div class="project-title-row">
+              <div class="project-title">Linux Dual-Boot Setup</div>
+              <div class="project-type">Linux</div>
+            </div>
+            <p>
+              Installed a Linux distribution alongside Windows, created
+              proper partitions, and configured the bootloader for daily
+              use without breaking the main system.
+            </p>
+            <div class="project-meta">
+              <div class="project-tags">
+                <span class="project-tag-pill">Linux install</span>
+                <span class="project-tag-pill">Partitioning</span>
+              </div>
+              <span>Home laptop</span>
+            </div>
+          </article>
+
+          <article class="project-card" data-category="crypto">
+            <div class="project-title-row">
+              <div class="project-title">Crypto Wallet Setup</div>
+              <div class="project-type">Crypto</div>
+            </div>
+            <p>
+              Experimented with non-custodial wallets: generated seed
+              phrases, secured them offline, made small test transfers, and
+              learned the basics of gas fees and network selection.
+            </p>
+            <div class="project-meta">
+              <div class="project-tags">
+                <span class="project-tag-pill">Wallets</span>
+                <span class="project-tag-pill">Security</span>
+              </div>
+              <span>Ongoing learning</span>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- EXPERIENCE -->
+      <section id="experience">
+        <h2>Experience</h2>
+        <h3>Where I’ve learned so far</h3>
+        <div class="experience-list">
+          <div class="experience-item">
+            <div class="experience-header">
+              <div>
+                <div class="experience-role">Student & Tech Enthusiast</div>
+                <div class="experience-place">High school & personal projects</div>
+              </div>
+              <div class="experience-dates">2023 – Present</div>
+            </div>
+            <div class="experience-points">
+              <span>• Helped friends and family with basic PC and phone troubleshooting.</span>
+              <span>• Performed small repairs: RAM upgrades, storage swaps, OS reinstalls.</span>
+              <span>• Built my first custom PC and started experimenting with Linux distributions.</span>
+            </div>
+          </div>
+
+          <div class="experience-item">
+            <div class="experience-header">
+              <div>
+                <div class="experience-role">Future Electronics Store Team Member</div>
+                <div class="experience-place">Your company?</div>
+              </div>
+              <div class="experience-dates">Open to start</div>
+            </div>
+            <div class="experience-points">
+              <span>• Looking for a place where I can support customers with real hardware and software issues.</span>
+              <span>• Eager to learn store procedures, ticketing systems, and customer service workflows.</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CONTACT -->
+      <section id="contact">
+        <h2>Contact</h2>
+        <h3>Let’s talk</h3>
+        <div class="contact-grid">
+          <div class="contact-text">
+            I’m looking for opportunities in <strong>electronics, repair</strong> or
+            <strong>tech retail</strong>, where I can grow from real work while helping
+            customers understand and fix their devices.
+            <br /><br />
+            I’m comfortable around computers, phones, Linux, and basic crypto topics,
+            and I’m ready to learn whatever tools your store uses. I show up, ask
+            questions when I’m not sure, and take care of the details.
+          </div>
+          <div class="contact-details">
+            <div class="contact-row">
+              <div class="contact-label">Email</div>
+              <div class="contact-value">
+                <!-- Replace with Samuele's real email -->
+                <a href="mailto:samuele@example.com">sam.mnrl2008@gmail.com</a>
+              </div>
+            </div>
+            <div class="contact-row">
+              <div class="contact-label">Location</div>
+              <div class="contact-value">[Montreal, QC]</div>
+            </div>
+            <div class="contact-row">
+              <div class="contact-label">Available for</div>
+              <div class="contact-value">Part-time / student job / internship</div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div>© <span id="year"></span> Samuele M. All rights reserved.</div>
+      <div class="footer-right">
+        <span class="footer-badge">Built with HTML, CSS & JS</span>
+        <span class="footer-badge">Dark gradient • “SM” logo</span>
+      </div>
+    </footer>
+  </div>
+
+  <button class="back-to-top" id="backToTop" aria-label="Back to top">
+    <svg viewBox="0 0 24 24" fill="none">
+      <path d="M12 5l-7 7m7-7l7 7M12 5v14" stroke="currentColor" stroke-width="1.7"
+        stroke-linecap="round" stroke-linejoin="round" />
+    </svg>
+  </button>
+
+  <script>
+    // Smooth scroll for nav and CTA buttons
+    document.querySelectorAll(".nav-link, [data-scroll-target]").forEach((el) => {
+      el.addEventListener("click", (e) => {
+        e.preventDefault();
+        const targetId =
+          el.getAttribute("href") || el.getAttribute("data-scroll-target");
+        const targetEl = document.querySelector(targetId);
+        if (targetEl) {
+          const offset = 70; // roughly header height
+          const rect = targetEl.getBoundingClientRect();
+          const scrollTop = window.scrollY || document.documentElement.scrollTop;
+          const top = rect.top + scrollTop - offset;
+          window.scrollTo({ top, behavior: "smooth" });
+        }
+      });
+    });
+
+    // Highlight active nav item on scroll
+    const sections = Array.from(document.querySelectorAll("main section"));
+    const navLinks = Array.from(document.querySelectorAll(".nav-link"));
+
+    function updateActiveNav() {
+      const scrollPos = window.scrollY || document.documentElement.scrollTop;
+      let currentId = sections[0]?.id;
+
+      sections.forEach((sec) => {
+        const rect = sec.getBoundingClientRect();
+        const offsetTop = rect.top + scrollPos;
+        if (scrollPos + 120 >= offsetTop) {
+          currentId = sec.id;
+        }
+      });
+
+      navLinks.forEach((link) => {
+        const href = link.getAttribute("href");
+        link.classList.toggle("active", href === `#${currentId}`);
+      });
+    }
+
+    window.addEventListener("scroll", updateActiveNav);
+    window.addEventListener("load", updateActiveNav);
+
+    // Animated skill tags
+    const skillTags = Array.from(document.querySelectorAll(".skill-tag"));
+
+    function animateSkillTags() {
+      skillTags.forEach((tag, index) => {
+        setTimeout(() => {
+          tag.classList.add("is-animated");
+          setTimeout(() => tag.classList.remove("is-animated"), 550);
+        }, index * 70);
+      });
+    }
+
+    // Run once on load
+    window.addEventListener("load", animateSkillTags);
+    // Repeat every few seconds
+    setInterval(animateSkillTags, 5000);
+
+    // Project filter buttons
+    const filterButtons = Array.from(document.querySelectorAll(".filter-btn"));
+    const projectCards = Array.from(document.querySelectorAll(".project-card"));
+
+    filterButtons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const filter = btn.getAttribute("data-filter");
+
+        filterButtons.forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+
+        projectCards.forEach((card) => {
+          const category = card.getAttribute("data-category");
+          if (filter === "all" || filter === category) {
+            card.classList.remove("hidden");
+          } else {
+            card.classList.add("hidden");
+          }
+        });
+      });
+    });
+
+    // Back to top button
+    const backToTopBtn = document.getElementById("backToTop");
+    window.addEventListener("scroll", () => {
+      const y = window.scrollY || document.documentElement.scrollTop;
+      if (y > 200) {
+        backToTopBtn.classList.add("visible");
+      } else {
+        backToTopBtn.classList.remove("visible");
+      }
+    });
+
+    backToTopBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    // Footer year
+    document.getElementById("year").textContent =
+      new Date().getFullYear().toString();
+  </script>
 </body>
 </html>
